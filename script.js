@@ -1,26 +1,22 @@
-document.getElementById("askButton").addEventListener("click", function () {
-  // Hiển thị câu trả lời
-  const answerDiv = document.getElementById("answer");
-  answerDiv.style.display = "block";
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const wrapper = document.querySelector(".button-wrapper");
 
-  // Tiếp tục tạo trái tim bay lên mỗi giây
-  setInterval(() => {
-    createHeart(document.getElementById("hearts"));
-  }, 500); // Tạo trái tim mới mỗi 500ms (nửa giây)
-});
+function moveNoButton() {
+  const wrapperRect = wrapper.getBoundingClientRect();
+  const maxX = wrapper.clientWidth - noBtn.offsetWidth;
+  const maxY = wrapper.clientHeight - noBtn.offsetHeight;
 
-function createHeart(parentElement) {
-  const heart = document.createElement("span");
-  heart.classList.add("heart");
-  heart.textContent = "❤️";
+  const randX = Math.random() * maxX;
+  const randY = Math.random() * maxY;
 
-  // Vị trí ngẫu nhiên cho mỗi trái tim
-  heart.style.left = Math.random() * 100 + "%";
-
-  parentElement.appendChild(heart);
-
-  // Xóa trái tim sau khi hiệu ứng hoàn tất
-  setTimeout(() => {
-    heart.remove();
-  }, 2000); // Trái tim biến mất sau 2 giây
+  noBtn.style.left = `${randX}px`;
+  noBtn.style.top = `${randY}px`;
 }
+
+noBtn.addEventListener("mouseover", moveNoButton); // desktop
+noBtn.addEventListener("touchstart", moveNoButton); // mobile
+
+yesBtn.addEventListener("click", () => {
+  alert("Yêu em💘");
+});
